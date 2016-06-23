@@ -16,7 +16,8 @@ namespace LinqMVCDemo.Controllers
         //    return View();
         //}
 
-        public JsonResult Index()
+        //public JsonResult Index()
+        public ActionResult Index()
         {
             List<Menu> demos = new List<Menu>(){
                 new Menu(){ObjType = "OT1", ObjSubType = "OST1", ObjName= "ON1"},
@@ -30,17 +31,26 @@ namespace LinqMVCDemo.Controllers
                 new Menu(){ObjType = "OT3", ObjSubType = "OST3.2", ObjName= "ON3.2"},
                 new Menu(){ObjType = "OT3", ObjSubType = "OST3.3", ObjName= "ON3.3"},
             };
-            List<Menu> children = new List<Menu>();
-            var query = from temp in demos
-                        group temp by new { temp.ObjType, temp.ObjSubType,temp.ObjName } into newgrp
-                        select new Menu()
-                        {
-                            ObjType= newgrp.Key.ObjType,
-                            ObjSubType = newgrp.Key.ObjSubType,
-                            ObjName = newgrp.Key.ObjName,
-                            children = newgrp.ToList(),
-                        };
-            return Json(query, JsonRequestBehavior.AllowGet);
+            List<ObjectData> obj = new List<ObjectData>();
+            var query = demos.GroupBy(m => m.ObjType).ToList();
+            foreach (var subgroup in query)
+            {
+                obj.Add(new ObjectData() { ObjectType = subgroup.Key , ObjectName="Type"});
+                //Console.WriteLine(subgroup.Key + ":");
+                var query2 = subgroup.GroupBy(m => m.ObjSubType);
+                    foreach(var subgroup2 in query2)
+                    {
+                        obj.Add(new ObjectData() { ObjectType = subgroup2.Key, ObjectName = "SubType" });
+                        //Console.WriteLine(subgropu2.Key);
+                        foreach (Menu m in subgroup2)
+                            obj.Add(new ObjectData() { ObjectType = m.ObjName, ObjectName = "Object" });
+                            //Console.WriteLine(m.ObjName);
+                    }
+                
+                    
+            }
+           // return Json(obj, JsonRequestBehavior.AllowGet);
+            return View(obj);
         }
-	}
+    }
 }

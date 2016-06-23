@@ -1,7 +1,32 @@
-﻿
+﻿@model List<LinqMVCDemo.Models.ObjectData>
+
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
+
+
+    @foreach (var Type in Model)
+    {
+        <li>
+            @if (Type.ObjectName == "Type")
+            {
+                @Html.DisplayFor(Item => Type.ObjectType)
+            }
+            else if (Type.ObjectName == "SubType")
+            {
+                <ul>
+                     @Html.DisplayFor(Item => Type.ObjectType)
+                </ul>
+            }
+            else
+            {
+                <ul>
+                    @Html.DisplayFor(Item => Type.ObjectType)
+                </ul>
+            }
+
+        </li>
+    }
 

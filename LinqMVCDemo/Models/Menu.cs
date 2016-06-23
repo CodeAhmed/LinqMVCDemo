@@ -12,4 +12,10 @@ namespace LinqMVCDemo.Models
         public string ObjName { get; set; }
         public List<Menu> children { get; set; }
     }
+
+    public class ObjectData
+    {
+        public string ObjectName { get; set; }
+        public string ObjectType { get; set; }
+    }
 }
