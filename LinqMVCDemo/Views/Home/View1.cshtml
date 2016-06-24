@@ -15,14 +15,86 @@
                 @{int c = 1;}
                 @foreach (var Type in Model)
                 {
-                    @if (c == 1) { }
-                    <li class="dd-item" data-id="@j" style="">
+                    if (c == 1)
+                    {
+                        <li class="dd-item" data-id="@j" style="">
+                            @if (Type.ObjectType == "Type")
+                            {
+                                <div class="dd-handle">@Html.DisplayFor(Item => Type.ObjectName)</div>
+                                {c++;}
+                                continue;
+                            }
+
+                            else
+                            {
+                                <ol class="dd-list" style="">
+                                    <li class="dd-item" data-id="@j">
+                                        @if (Type.ObjectType == "SubType")
+                                        {
+                                            <div class="dd-handle">@Html.DisplayFor(Item => Type.ObjectName)</div>
+                                            continue;
+                                        }
+                                        else
+                                        {
+                                            <ol class="dd-list">
+                                                <li class="dd-item" data-id="@j">
+                                                    <div class="dd-handle">@Html.DisplayFor(Item => Type.ObjectName)</div>
+                                                    @{c = 1;}
+                                                </li>
+                                            </ol>
+                                        }
+                                    </li>
+                                </ol>
+                            }
+                            @{j++;}
+                        </li>
+                    }
+                    else
+                    {
+                        <ol class="dd-list" style="">
+                                    <li class="dd-item" data-id="@j">
+                                        @if (Type.ObjectType == "SubType")
+                                        {
+                                            <div class="dd-handle">@Html.DisplayFor(Item => Type.ObjectName)</div>
+                                            continue;
+                                        }
+                                        else
+                                        {
+                                            <ol class="dd-list">
+                                                <li class="dd-item" data-id="@j">
+                                                    <div class="dd-handle">@Html.DisplayFor(Item => Type.ObjectName)</div>
+                                                    @{c = 1;}
+                                                    
+                                                </li>
+                                            </ol>
+                                        }
+                                    </li>
+                                </ol>
+                    }
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    @*<li class="dd-item" data-id="@j" style="">
                         @if (Type.ObjectType == "Type")
                         {
                             <div class="dd-handle">@Html.DisplayFor(Item => Type.ObjectName)</div>
                             continue;
                         }
-                        
+
                         else
                         {
                             <ol class="dd-list" style="">
@@ -37,7 +109,7 @@
                                         <ol class="dd-list">
                                             <li class="dd-item" data-id="@j">
                                                 <div class="dd-handle">@Html.DisplayFor(Item => Type.ObjectName)</div>
-                                                
+
                                             </li>
                                         </ol>
                                     }
@@ -46,7 +118,7 @@
                         }
                         @{j++;}
 
-                    </li>
+                    </li>*@
                 }
             </ol>
 
