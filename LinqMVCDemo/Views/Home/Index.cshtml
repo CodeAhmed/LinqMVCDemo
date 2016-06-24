@@ -11,9 +11,7 @@
         <h5 class="row-title"><i class="typcn typcn-th-menu"></i>Object List</h5>
         <div class="dd" id="nestable">
             <ol class="dd-list">
-                @Html.Partial("~/Views/Home/_MenuPartial.cshtml", Model)
-
-                @*@{int j = 1;}
+                @{int j = 1;}
 
                 @foreach (var Type in Model)
                 {
@@ -44,8 +42,7 @@
                         @{j++;}
 
                     </li>
-                }*@
-
+                }
             </ol>
 
         </div>
@@ -75,14 +72,7 @@
 
 @section scripts{
 
-    @*<script type="text/javascript">
-            jQuery(function ($) {
-                $('.dd').nestable();
-                $('.dd-handle a').on('mousedown', function (e) {
-                    e.stopPropagation();
-                });
-            });
-        </script>*@
+
     <script>
         $(document).ready(function () {
 
