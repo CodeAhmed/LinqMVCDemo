@@ -29,12 +29,7 @@ namespace LinqMVCDemo.Controllers
             };
 
             var query = demos.GroupBy(m => m.ObjType).ToList();
-            foreach (var item in query)
-            {
-                var result = item.GroupBy(m => m.ObjSubType).ToList();
-            }
             return View(query);
-
         }
     }
 }
